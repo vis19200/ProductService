@@ -4,6 +4,7 @@ import com.company.productservice.dtos.FakeStoreProductDto;
 import com.company.productservice.exceptions.ProductNotFoundException;
 import com.company.productservice.models.Category;
 import com.company.productservice.models.Product;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -13,7 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("fakeStoreProductService")
+@Primary
 public class FakeStoreProductService implements ProductService {
 
     private RestTemplate restTemplate;
@@ -71,13 +73,15 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product replaceProduct(Long id, FakeStoreProductDto productDto) {
-        RequestCallback requestCallback = restTemplate.httpEntityCallback(productDto, FakeStoreProductDto.class);
-        HttpMessageConverterExtractor<FakeStoreProductDto> responseExtractor = new HttpMessageConverterExtractor(FakeStoreProductDto.class, restTemplate.getMessageConverters());
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.execute("https://fakestoreapi.com/products/" + id, HttpMethod.PUT, requestCallback, responseExtractor);
+    public Product replaceProduct(Long id, Product product) {
+//        RequestCallback requestCallback = restTemplate.httpEntityCallback(productDto, FakeStoreProductDto.class);
+//        HttpMessageConverterExtractor<FakeStoreProductDto> responseExtractor = new HttpMessageConverterExtractor(FakeStoreProductDto.class, restTemplate.getMessageConverters());
+//        FakeStoreProductDto fakeStoreProductDto = restTemplate.execute("https://fakestoreapi.com/products/" + id, HttpMethod.PUT, requestCallback, responseExtractor);
+//
+//        assert fakeStoreProductDto != null;
+//        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
 
-        assert fakeStoreProductDto != null;
-        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+        return null;
     }
 
     @Override

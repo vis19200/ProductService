@@ -4,6 +4,7 @@ import com.company.productservice.dtos.FakeStoreProductDto;
 import com.company.productservice.exceptions.ProductNotFoundException;
 import com.company.productservice.models.Product;
 import com.company.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ProductController {
 
     final private ProductService productService;
 
-    ProductController(ProductService productService) {
+    ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -34,7 +35,7 @@ public class ProductController {
 
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
-        return new Product();
+        return productService.createProduct(product);
     }
 
     @PatchMapping("/{id}")
@@ -43,8 +44,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> replaceProduct(@PathVariable("id") Long id, @RequestBody FakeStoreProductDto productDto) {
-        Product product = productService.replaceProduct(id, productDto);
+    public ResponseEntity<Product> replaceProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+        product = productService.replaceProduct(id, product);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 

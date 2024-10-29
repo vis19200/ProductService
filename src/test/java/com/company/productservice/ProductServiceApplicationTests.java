@@ -26,7 +26,7 @@ class ProductServiceApplicationTests {
     }
 
     @Test
-    @Transactional
+//    @Transactional
     public void testQueries() {
 //        List<Product> products = productRepository.someRandomQuery();
 //        System.out.println("DEBUG");
@@ -44,15 +44,15 @@ class ProductServiceApplicationTests {
 //        }
 //        System.out.println("DEBUG");
 
-        Optional<Category> optionalCategory = categoryRepository.findById(1L);
-        Category category = null;
-        if(optionalCategory.isPresent()) {
-            category = optionalCategory.get();
-        }
-
-        List<Product> products = category.getProducts();
-        System.out.println("DEBUG");
-        products.forEach(product -> System.out.println(product.getTitle()));
+//        Optional<Category> optionalCategory = categoryRepository.findById(1L);
+//        Category category = null;
+//        if(optionalCategory.isPresent()) {
+//            category = optionalCategory.get();
+//        }
+//
+//        List<Product> products = category.getProducts();
+//        System.out.println("DEBUG");
+//        products.forEach(product -> System.out.println(product.getTitle()));
 
     }
 
